@@ -68,12 +68,13 @@ namespace WinTumblr
             //string s;
             DataRowView drv = (DataRowView)cbAcc.SelectedValue;
 
-            string acc = (string)drv[0];
-            string email = (string)drv[1];
+            string acc = (string)drv["account"];
+            string email = (string)drv["email"];
+            string group = (string)drv["group"];
             string password = "";
             try
             {
-                password = Program.data.rox((string)drv[2]);
+                password = Program.data.rox((string)drv["password"]);
             }
             catch
             {
@@ -86,6 +87,7 @@ namespace WinTumblr
             body = txtBody.Text.Replace("\r\n", " ");
             text.Email = email;
             text.Password = password;
+            text.Group = group;
             text.Title = title;
             text.Body = body;
             if (((body.Length > 0) || (title.Length > 0)) && (email.Length > 0) && (password.Length > 0))

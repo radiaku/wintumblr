@@ -51,6 +51,7 @@ namespace WinTumblr
                         Program.data.ds.Accounts.Rows[i].BeginEdit();
                         Program.data.ds.Accounts.Rows[i]["email"] = txtEmail.Text;
                         Program.data.ds.Accounts.Rows[i]["password"] = Program.data.xor(txtPassword.Text);
+                        Program.data.ds.Accounts.Rows[i]["group"] = txtGroup.Text;
                         Program.data.ds.Accounts.Rows[i]["default"] = cbDefault.Checked;
                         Program.data.ds.Accounts.Rows[i].EndEdit();
                         Program.data.ds.Accounts.Rows[i].AcceptChanges();
@@ -68,7 +69,7 @@ namespace WinTumblr
 
                 try
                 {
-                    Program.data.ds.Accounts.AddAccountsRow(txtAccountName.Text, txtEmail.Text, Program.data.xor(txtPassword.Text), cbDefault.Checked);
+                    Program.data.ds.Accounts.AddAccountsRow(txtAccountName.Text, txtEmail.Text, Program.data.xor(txtPassword.Text), cbDefault.Checked, txtGroup.Text);
                 }
                 catch
                 {
@@ -100,6 +101,7 @@ namespace WinTumblr
                 rowindex = -1;
                 txtAccountName.Text = "";
                 txtEmail.Text = "";
+                txtGroup.Text = "";
                 txtPassword.Text = "";
                 cbDefault.Checked = false;
                 dgvAccounts.ClearSelection();
@@ -116,6 +118,15 @@ namespace WinTumblr
                 rowindex = i;
                 txtAccountName.Text = (string)Program.data.ds.Accounts.Rows[i]["account"];
                 txtEmail.Text = (string)Program.data.ds.Accounts.Rows[i]["email"];
+                if (Program.data.ds.Accounts.Rows[i]["group"] != DBNull.Value)
+                {
+                    txtGroup.Text = (string)Program.data.ds.Accounts.Rows[i]["group"];
+                }
+                else
+                {
+                    txtGroup.Text = "";
+                }
+
                 try
                 {
                     txtPassword.Text = Program.data.rox((string)Program.data.ds.Accounts.Rows[i]["password"]);
@@ -131,6 +142,7 @@ namespace WinTumblr
                 rowindex = -1;
                 txtAccountName.Text = "";
                 txtEmail.Text = "";
+                txtGroup.Text = "";
                 txtPassword.Text = "";
                 cbDefault.Checked = false;
             }
