@@ -132,6 +132,7 @@ namespace WinTumblr
         {
             private string sEmail = "";
             private string sPassword = "";
+            private string sGroup = "";
             private bool bPrivate = false;
             private string sDate = "";
             private string sTags = "";
@@ -156,6 +157,17 @@ namespace WinTumblr
                 set
                 {
                     sPassword = value;
+                }
+            }
+            public string Group
+            {
+                get
+                {
+                    return sGroup;
+                }
+                set
+                {
+                    sGroup = value;
                 }
             }
             public bool IsPrivate
@@ -556,6 +568,10 @@ namespace WinTumblr
             Encoder enc = Encoding.UTF8.GetEncoder();
             string postData = "email=" + text.Email;
             postData += "&password=" + text.Password;
+            if (text.Group.Length > 0)
+            {
+                postData += "&group=" + text.Group;
+            }
             postData += "&type=regular";
             if (((text.Title == null) || (text.Title == "")) && ((text.Body == null) || (text.Body == "")))
             {
@@ -599,6 +615,10 @@ namespace WinTumblr
             Encoder enc = Encoding.UTF8.GetEncoder();
             string postData = "email=" + photo.Email;
             postData += "&password=" + photo.Password;
+            if (photo.Group.Length > 0)
+            {
+                postData += "&group=" + photo.Group;
+            }
             postData += "&type=photo";
             if (((photo.Source == null) || (photo.Source == "")) && ((photo.Data == null) || (photo.Data == "")))
             {
@@ -653,6 +673,10 @@ namespace WinTumblr
             Encoder enc = Encoding.UTF8.GetEncoder();
             string postData = "email=" + quote.Email;
             postData += "&password=" + quote.Password;
+            if (quote.Group.Length > 0)
+            {
+                postData += "&group=" + quote.Group;
+            }
             postData += "&type=quote";
             if ((quote.TheQuote == null) || (quote.TheQuote == ""))
             {
@@ -696,6 +720,10 @@ namespace WinTumblr
              Encoder enc = Encoding.UTF8.GetEncoder();
              string postData = "email=" + link.Email;
              postData += "&password=" + link.Password;
+             if (link.Group.Length > 0)
+             {
+                 postData += "&group=" + link.Group;
+             }
              postData += "&type=link";
              if ((link.Url == null) || (link.Url == ""))
              {
@@ -743,6 +771,10 @@ namespace WinTumblr
              Encoder enc = Encoding.UTF8.GetEncoder();
              string postData = "email=" + chat.Email;
              postData += "&password=" + chat.Password;
+             if (chat.Group.Length > 0)
+             {
+                 postData += "&group=" + chat.Group;
+             }
              postData += "&type=conversation";
              if ((chat.TheChat == null) || (chat.TheChat == ""))
              {
@@ -786,6 +818,10 @@ namespace WinTumblr
              Encoder enc = Encoding.UTF8.GetEncoder();
              string postData = "email=" + video.Email;
              postData += "&password=" + video.Password;
+             if (video.Group.Length > 0)
+             {
+                 postData += "&group=" + video.Group;
+             }
              postData += "&type=video";
              if ((video.Embed == null) || (video.Embed == ""))
              {

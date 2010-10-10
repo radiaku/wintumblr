@@ -76,12 +76,13 @@ namespace WinTumblr
             //string s;
             DataRowView drv = (DataRowView)cbAcc.SelectedValue;
 
-            string acc = (string)drv[0];
-            string email = (string)drv[1];
+            string acc = (string)drv["account"];
+            string email = (string)drv["email"];
+            string group = (string)drv["group"];
             string password = "";
             try
             {
-                password = Program.data.rox((string)drv[2]);
+                password = Program.data.rox((string)drv["password"]);
             }
             catch
             {
@@ -94,6 +95,7 @@ namespace WinTumblr
             conv = txtDialogue.Text;
             chat.Email = email;
             chat.Password = password;
+            chat.Group = group;
             chat.Title = title;
             chat.TheChat = conv;
             if ((conv.Length > 0) && (email.Length > 0) && (password.Length > 0) && (txtDialogue.ForeColor != Color.LightGray))

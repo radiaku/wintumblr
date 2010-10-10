@@ -31,12 +31,6 @@ namespace WinTumblr
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAccounts));
             this.dgvAccounts = new System.Windows.Forms.DataGridView();
-            this.accountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.passwordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.defaultDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.accountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.winTumblrData = new WinTumblr.WinTumblrData();
             this.btnAddUpdate = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
@@ -50,6 +44,15 @@ namespace WinTumblr
             this.cbDefault = new System.Windows.Forms.CheckBox();
             this.ttEnc = new System.Windows.Forms.ToolTip(this.components);
             this.btnValidate = new System.Windows.Forms.Button();
+            this.txtGroup = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.group = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.accountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.passwordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.defaultDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.accountsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.winTumblrData = new WinTumblr.WinTumblrData();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccounts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accountsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.winTumblrData)).BeginInit();
@@ -66,10 +69,11 @@ namespace WinTumblr
             this.dgvAccounts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.accountDataGridViewTextBoxColumn,
             this.emailDataGridViewTextBoxColumn,
+            this.group,
             this.passwordDataGridViewTextBoxColumn,
             this.defaultDataGridViewCheckBoxColumn});
             this.dgvAccounts.DataSource = this.accountsBindingSource;
-            this.dgvAccounts.Location = new System.Drawing.Point(12, 148);
+            this.dgvAccounts.Location = new System.Drawing.Point(12, 178);
             this.dgvAccounts.MultiSelect = false;
             this.dgvAccounts.Name = "dgvAccounts";
             this.dgvAccounts.ReadOnly = true;
@@ -77,16 +81,156 @@ namespace WinTumblr
             this.dgvAccounts.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvAccounts.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvAccounts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAccounts.Size = new System.Drawing.Size(423, 120);
+            this.dgvAccounts.Size = new System.Drawing.Size(535, 120);
             this.dgvAccounts.StandardTab = true;
-            this.dgvAccounts.TabIndex = 7;
+            this.dgvAccounts.TabIndex = 10;
             this.dgvAccounts.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccounts_RowEnter);
+            // 
+            // btnAddUpdate
+            // 
+            this.btnAddUpdate.Location = new System.Drawing.Point(310, 149);
+            this.btnAddUpdate.Name = "btnAddUpdate";
+            this.btnAddUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnAddUpdate.TabIndex = 7;
+            this.btnAddUpdate.Text = "Add/Update";
+            this.btnAddUpdate.UseVisualStyleBackColor = true;
+            this.btnAddUpdate.Click += new System.EventHandler(this.btnAddUpdate_Click);
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.Location = new System.Drawing.Point(391, 149);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnRemove.TabIndex = 8;
+            this.btnRemove.Text = "Remove";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnClose.Location = new System.Drawing.Point(472, 149);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(75, 23);
+            this.btnClose.TabIndex = 9;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 162);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(126, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Select an account to edit";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 13);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(160, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Account Name (Must be unique)";
+            // 
+            // txtAccountName
+            // 
+            this.txtAccountName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAccountName.Location = new System.Drawing.Point(203, 6);
+            this.txtAccountName.Name = "txtAccountName";
+            this.txtAccountName.Size = new System.Drawing.Size(344, 24);
+            this.txtAccountName.TabIndex = 0;
+            // 
+            // txtEmail
+            // 
+            this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmail.Location = new System.Drawing.Point(203, 36);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(344, 24);
+            this.txtEmail.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 43);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(186, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Email Address (Not unique for Groups)";
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPassword.Location = new System.Drawing.Point(203, 96);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(263, 24);
+            this.txtPassword.TabIndex = 4;
+            this.ttEnc.SetToolTip(this.txtPassword, "Encrypted during storage");
+            this.txtPassword.UseSystemPasswordChar = true;
+            this.txtPassword.Enter += new System.EventHandler(this.txtPassword_Enter);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 103);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(129, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Password for this account";
+            // 
+            // cbDefault
+            // 
+            this.cbDefault.AutoSize = true;
+            this.cbDefault.Location = new System.Drawing.Point(178, 126);
+            this.cbDefault.Name = "cbDefault";
+            this.cbDefault.Size = new System.Drawing.Size(103, 17);
+            this.cbDefault.TabIndex = 6;
+            this.cbDefault.Text = "Default Account";
+            this.cbDefault.UseVisualStyleBackColor = true;
+            // 
+            // btnValidate
+            // 
+            this.btnValidate.Location = new System.Drawing.Point(472, 98);
+            this.btnValidate.Name = "btnValidate";
+            this.btnValidate.Size = new System.Drawing.Size(75, 23);
+            this.btnValidate.TabIndex = 5;
+            this.btnValidate.Text = "&Validate";
+            this.ttEnc.SetToolTip(this.btnValidate, "Check that the account details are correct");
+            this.btnValidate.UseVisualStyleBackColor = true;
+            this.btnValidate.Click += new System.EventHandler(this.btnValidate_Click);
+            // 
+            // txtGroup
+            // 
+            this.txtGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtGroup.Location = new System.Drawing.Point(203, 66);
+            this.txtGroup.Name = "txtGroup";
+            this.txtGroup.Size = new System.Drawing.Size(344, 24);
+            this.txtGroup.TabIndex = 3;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 73);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(157, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Group Name (optional group url)";
+            // 
+            // group
+            // 
+            this.group.DataPropertyName = "group";
+            this.group.FillWeight = 48F;
+            this.group.HeaderText = "Group";
+            this.group.Name = "group";
+            this.group.ReadOnly = true;
             // 
             // accountDataGridViewTextBoxColumn
             // 
             this.accountDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.accountDataGridViewTextBoxColumn.DataPropertyName = "account";
-            this.accountDataGridViewTextBoxColumn.FillWeight = 20F;
+            this.accountDataGridViewTextBoxColumn.FillWeight = 19.18782F;
             this.accountDataGridViewTextBoxColumn.HeaderText = "Account";
             this.accountDataGridViewTextBoxColumn.MinimumWidth = 60;
             this.accountDataGridViewTextBoxColumn.Name = "accountDataGridViewTextBoxColumn";
@@ -96,7 +240,7 @@ namespace WinTumblr
             // 
             this.emailDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.emailDataGridViewTextBoxColumn.DataPropertyName = "email";
-            this.emailDataGridViewTextBoxColumn.FillWeight = 50F;
+            this.emailDataGridViewTextBoxColumn.FillWeight = 47.96954F;
             this.emailDataGridViewTextBoxColumn.HeaderText = "Email";
             this.emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
             this.emailDataGridViewTextBoxColumn.ReadOnly = true;
@@ -115,7 +259,7 @@ namespace WinTumblr
             // 
             this.defaultDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.defaultDataGridViewCheckBoxColumn.DataPropertyName = "default";
-            this.defaultDataGridViewCheckBoxColumn.FillWeight = 10F;
+            this.defaultDataGridViewCheckBoxColumn.FillWeight = 9.593908F;
             this.defaultDataGridViewCheckBoxColumn.HeaderText = "default";
             this.defaultDataGridViewCheckBoxColumn.Name = "defaultDataGridViewCheckBoxColumn";
             this.defaultDataGridViewCheckBoxColumn.ReadOnly = true;
@@ -130,127 +274,14 @@ namespace WinTumblr
             this.winTumblrData.DataSetName = "WinTumblrData";
             this.winTumblrData.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // btnAddUpdate
-            // 
-            this.btnAddUpdate.Location = new System.Drawing.Point(198, 119);
-            this.btnAddUpdate.Name = "btnAddUpdate";
-            this.btnAddUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnAddUpdate.TabIndex = 4;
-            this.btnAddUpdate.Text = "Add/Update";
-            this.btnAddUpdate.UseVisualStyleBackColor = true;
-            this.btnAddUpdate.Click += new System.EventHandler(this.btnAddUpdate_Click);
-            // 
-            // btnRemove
-            // 
-            this.btnRemove.Location = new System.Drawing.Point(279, 119);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(75, 23);
-            this.btnRemove.TabIndex = 5;
-            this.btnRemove.Text = "Remove";
-            this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
-            // 
-            // btnClose
-            // 
-            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(360, 119);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 6;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 132);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(126, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Select an account to edit";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 13);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(160, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Account Name (Must be unique)";
-            // 
-            // txtAccountName
-            // 
-            this.txtAccountName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAccountName.Location = new System.Drawing.Point(178, 6);
-            this.txtAccountName.Name = "txtAccountName";
-            this.txtAccountName.Size = new System.Drawing.Size(257, 24);
-            this.txtAccountName.TabIndex = 0;
-            // 
-            // txtEmail
-            // 
-            this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmail.Location = new System.Drawing.Point(178, 36);
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(257, 24);
-            this.txtEmail.TabIndex = 1;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 43);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(155, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Email Address (Must be unique)";
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPassword.Location = new System.Drawing.Point(178, 66);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(176, 24);
-            this.txtPassword.TabIndex = 2;
-            this.ttEnc.SetToolTip(this.txtPassword, "Encrypted during storage");
-            this.txtPassword.UseSystemPasswordChar = true;
-            this.txtPassword.Enter += new System.EventHandler(this.txtPassword_Enter);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 73);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(129, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Password for this account";
-            // 
-            // cbDefault
-            // 
-            this.cbDefault.AutoSize = true;
-            this.cbDefault.Location = new System.Drawing.Point(178, 96);
-            this.cbDefault.Name = "cbDefault";
-            this.cbDefault.Size = new System.Drawing.Size(103, 17);
-            this.cbDefault.TabIndex = 3;
-            this.cbDefault.Text = "Default Account";
-            this.cbDefault.UseVisualStyleBackColor = true;
-            // 
-            // btnValidate
-            // 
-            this.btnValidate.Location = new System.Drawing.Point(360, 68);
-            this.btnValidate.Name = "btnValidate";
-            this.btnValidate.Size = new System.Drawing.Size(75, 23);
-            this.btnValidate.TabIndex = 10;
-            this.btnValidate.Text = "&Validate";
-            this.ttEnc.SetToolTip(this.btnValidate, "Check that the account details are correct");
-            this.btnValidate.UseVisualStyleBackColor = true;
-            this.btnValidate.Click += new System.EventHandler(this.btnValidate_Click);
-            // 
             // frmAccounts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(447, 280);
+            this.ClientSize = new System.Drawing.Size(559, 310);
+            this.Controls.Add(this.txtGroup);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnValidate);
             this.Controls.Add(this.cbDefault);
             this.Controls.Add(this.txtPassword);
@@ -295,11 +326,14 @@ namespace WinTumblr
         private System.Windows.Forms.CheckBox cbDefault;
         private System.Windows.Forms.BindingSource accountsBindingSource;
         private WinTumblrData winTumblrData;
-        private System.Windows.Forms.DataGridViewTextBoxColumn accountDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn passwordDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn defaultDataGridViewCheckBoxColumn;
         private System.Windows.Forms.ToolTip ttEnc;
         private System.Windows.Forms.Button btnValidate;
+        private System.Windows.Forms.TextBox txtGroup;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn accountDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn group;
+        private System.Windows.Forms.DataGridViewTextBoxColumn passwordDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn defaultDataGridViewCheckBoxColumn;
     }
 }

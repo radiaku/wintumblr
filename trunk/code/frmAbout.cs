@@ -45,21 +45,6 @@ namespace WinTumblr
             Close();
         }
 
-        private void btnNdn_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            try
-            {
-                System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo(btnNdn.Tag.ToString());
-                info.UseShellExecute = true;
-                info.Verb = "open";
-                System.Diagnostics.Process.Start(info);
-            }
-            catch
-            {
-                MessageBox.Show(this, "WinTumblr could not start the web browser", "Error - WinTumblr", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void btn_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             try
